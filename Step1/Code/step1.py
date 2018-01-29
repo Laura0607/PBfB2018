@@ -31,7 +31,7 @@ for id in open(sys.argv[1]): #runs trough every ID.For each ID# in the list of I
     if id == "": #When all IDs in the list are gone trough the loop, continue. 
         continue
 
-    sys.stdout.write("Fetching %s..." % id) #prints for each ID: "Fetching ID$#..."
+    sys.stdout.write("Fetching %s..." % id) #prints for each ID: "Fetching ID$#..." so you know the program is running.
     sys.stdout.flush()
     out_file = os.path.join(sys.argv[2], id + ".fa") #Defines the outputfile (Output (FASTA)files will be saved in the directory provided by the user, with "ID#.fa" as file namer
     if os.path.exists(out_file): #If the output directory already exists, than print "already fetched"
@@ -39,6 +39,6 @@ for id in open(sys.argv[1]): #runs trough every ID.For each ID# in the list of I
 
     open(out_file, "w").write(urllib2.urlopen(url_template % id).read()) #open the output file for writing. Write the output of the script to a new FASTA file.
     #write the data from the url_template from the ID# to a new FASTA file in the defined new directory. 
-    print "Done" #print done after each ID# in the terminal 
+    print "Done" #prints done after each ID# in the terminal. so you know it is running
     time.sleep(1.0/3) #Pauses the python programme for 1/3 seconds before starting the loop for the next ID# in the list of IDs given
 
