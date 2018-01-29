@@ -19,9 +19,9 @@ Read this entire file before using the script
 ##Clone this repository
 Clone this repository to be able to stark working immediately, just do:
 
-'''
+´´´
 git clone https://github.com/Laura0607/PBfB2018.git
-'''
+´´´
 
 ##Scripts
 
