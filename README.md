@@ -13,7 +13,7 @@ Use a consistent structure for you project:
 ## Description:
 
 ## Step_1
-Purpose: Download a batch of FASTA files from NCBI and save it in a new directory.
+### Purpose: Download a batch of FASTA files from NCBI and save it in a new directory.
 
 Make a list of IDs of DNA sequences that you would like to download from NCBI.The IDs for genes can be found at the NCBI website by entering the gene name + species name. 
 Save this list as a .txt file in the Data directory: **~/PBfB2018/Step1/Data**
@@ -35,7 +35,7 @@ Import the time tool, in order to pause the python program.
 import time
 ```
 
-The program will ask you to enter a <genome_id_list>, this is a .txt file including the IDs from the gene of interest that you would like to download from NCBI.
+The program will ask you to enter a <genome_id_list>, this is a .txt file containing the IDs from the genes of interest that you would like to download from NCBI.
 The program will ask you to define <out_dir>, define here a name of a new outputdirectory where you would like to save the FASTA files.
 
 The url_template is used to retrieve FASTA files from NCBI.
@@ -47,15 +47,17 @@ The program retrieves for each ID in the list the FASTA file, and saves this as 
 
 
 ## Step_2
-Purpose: Conmbine the downloaded genes into one file named **"genename.fa"**.
+### Purpose: Combine the downloaded genes into one file named **"allgenes_genename.fa"**.
 
 Use the command line in the terminal in order to combine the downloaded files into one FASTA file.
-Save this new file in the Results directory within the Step2 directory.
+Save this new file in the Results directory within the Step2 directory:
 ```
 cd ~/PBfB2018/Step1/Data
 cat *fa > ~/PBfB2018/Step2/Results/allgenes_genename.fa
 ```
 
+## Step_2
+### Purpose: count the amount of DNA sequences, modify header names and count sequence lengths.
 
 
 
