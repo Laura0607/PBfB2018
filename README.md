@@ -16,7 +16,7 @@ Use a consistent structure for you project:
 Purpose: Download a batch of FASTA files from NCBI.
 
 Make a list of IDs that you would like to download from NCBI. Save this list as a .txt file.
-Use this list as <genome_id_list> in the script step_1.py.
+Use this list as <genome_id_list> in the script **step_1.py**.
 
 Import the tool "urllib2" to be able to download files from the internet:
 ```
@@ -34,7 +34,7 @@ Import the time tool, in order to pause the python program.
 import time
 ```
 
-The program will ask you to enter a <genome_id_list>, this is a .txt file including the IDs that you would like to download from NCBI
+The program will ask you to enter a <genome_id_list>, this is a .txt file including the IDs that you would like to download from NCBI.
 The program will ask you to define <out_dir>, define here the outputdirectory where you would like to save the FASTA files.
 
 The url_template is used to retrieve FASTA files from NCBI.
