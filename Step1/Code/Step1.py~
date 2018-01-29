@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+#Step_1
+#Purpose: Download FASTA files from NCBI
+#Written by: Laura van Rosmalen
+#Date: 29.01.2018
+
+#import the tool "urllib" for downloading files from the internet
+import urllib 
+
+#Microtus ochrogaster, TSHb
+#NewUrl = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=XM_005357118.1&rettype=fasta&retmode=text" 
+#MicOch_TSHb = urllib.urlopen(NewUrl)
+
+#for line in MicOch_TSHb:
+	#print Line.strip()
+	
