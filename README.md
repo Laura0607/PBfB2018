@@ -5,7 +5,7 @@
 
 Read this entire file before using the script
 
-##Description:
+## Description:
 
 
 
@@ -16,7 +16,7 @@ Read this entire file before using the script
 
 
 
-##Clone this repository
+## Clone this repository
 Clone this repository to be able to stark working immediately, just do:
 
 ```
