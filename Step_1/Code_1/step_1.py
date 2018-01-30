@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#Step_1
+#step_1
 #Purpose: Download a batch of Fasta files from NCBI
 #Modified by Laura van Rosmalen from https://github.com/adina/cibnor-2017/blob/master/scripts/fetch-genomes.py
 #Date 29.01.2018
@@ -16,7 +16,7 @@ import time
 
 #to count the number of arguments
 if len(sys.argv) != 3: #checks whether you at least entered 3 arguments
-    print "USAGE: fetch-genomes.py <genome_id_list> <out_dir>" #prints how the 
+    print "USAGE: step_1.py <genome_id_list> <out_dir>" #prints how the 
     	#script should be used. provide a list of IDs (genomelist.txt) and where 
     	#you want to save your files (the output directory) 
     sys.exit(1) #exit the function when the text has been printed
