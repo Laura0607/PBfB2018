@@ -1,4 +1,4 @@
-# Aligment of photoperiodic genes and tree building 
+# Alignment of photoperiodic genes and tree building 
 
 *Written by: Laura van Rosmalen*
 *January/February 2018*
@@ -12,8 +12,7 @@ Use a consistent structure for you project:
 
 ## Description:
 
-## Step_1
-### Purpose: Download a batch of FASTA files from NCBI and save it in a new directory.
+## Step_1: Download a batch of FASTA files containing genes of interestfrom NCBI and save it in a new directory.
 
 Make a list of IDs of DNA sequences that you would like to download from NCBI.The IDs for genes can be found at the NCBI website by entering the gene name + species name. 
 Save this list as a .txt file in the Data_1 directory: **~/PBfB2018/Step_1/Data_1**
@@ -44,9 +43,9 @@ import time
 The program will ask you to enter a <genome_id_list>, this is a .txt file containing the IDs from the genes of interest that you would like to download from NCBI.
 In this example we will enter: "TSHb.txt" here.
 The program will ask you to define <out_dir>, define here a name of a new outputdirectory where you would like to save the FASTA files.
-In this example we will enter: ~/PBfB2018/Step_1/Results_1/outTSHb
+In this example we will enter: **~/PBfB2018/Step_1/Results_1/outTSHb**
 
-Make sure your current directory is the same diretory as where your input file is located.
+Make sure your current working directory is the same directory as where your input file is located.
 So we will enter in the terminal: 
 ```
 laura@laura-VirtualBox:~/PBfB2018/Step_1/Data_1$ step_1.py TSHb.txt ~/PBfB2018/Step_1/Results_1/outTSHb
@@ -61,8 +60,7 @@ url_template = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucl
 The program retrieves the FASTA file for each ID in the input list, and saves this as "ID#.fa" in the new directory. 
 
 
-## Step_2
-### Purpose: Combine the downloaded genes into one file named **"allgenes_genename.fa"**.
+## Step_2: Combine the downloaded genes into one file named **"all_genename.fa"**.
 
 Use the command line in the terminal in order to combine the downloaded files into one FASTA file.
 Save this new file in the Results_2 directory within the Step_2 directory:
@@ -71,8 +69,7 @@ cd ~/PBfB2018/Step_1/Data_1/outTSHb/
 cat *fa > ~/PBfB2018/Step_2/Results_2/all_TSHb.fa
 ```
 
-## Step_3
-### Purpose: count the amount of DNA sequences,count sequence lengths and modify header names.
+## Step_3: Count the amount of DNA sequences, count sequence lengths and modify header names.
 
 Run the shell script **step_3a.sh** in your terminal to count the amount of DNA sequences in your FASTA file
 
@@ -102,10 +99,9 @@ This gives: **">NM_009432.2 Mus musculus"** as new header.
 
 Save the modified file as: **all_genename_mod.fa**
 
-## Step_4
-### Purpose: Align genes and build a tree
+## Step_4: Multiple sequence alignments and building a tree. 
 
-Use the command "clustalw" in your terminal in order to start a CLUSTAL multiple sequence alignment.
+Use the command ***"clustalw"*** in your terminal in order to start a CLUSTALW multiple sequence alignment.
 
 ```
 laura@laura-VirtualBox:~/PBfB2018/Step2/Results$ clustalw
@@ -425,8 +421,8 @@ _|    |
 >>> 
 ```
 
-## Step_5
-### Purpose: change the names in the tree into readable names
+## Step_5: Modify the names in the tree into human readable names 
+
 
 
 
