@@ -20,18 +20,18 @@ Save this list as a .txt file in the Data directory: **~/PBfB2018/Step1/Data**
 Use this list as <genome_id_list> in the script **step_1.py**.
 
 Import the tool "urllib2" to be able to download files from the internet:
-```
+```python
 import urllib2
 ```
 
 Import the tools for file, directory and path manipulations:
-```
+```python
 import os
 import sys
 ```
 
 Import the time tool, in order to pause the python program.
-```
+```python
 import time
 ```
 
@@ -39,7 +39,7 @@ The program will ask you to enter a <genome_id_list>, this is a .txt file contai
 The program will ask you to define <out_dir>, define here a name of a new outputdirectory where you would like to save the FASTA files.
 
 The url_template is used to retrieve FASTA files from NCBI.
-```
+```python
 url_template = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=%s&rettype=fasta&retmode=text"
 ```
 
@@ -59,7 +59,32 @@ cat *fa > ~/PBfB2018/Step2/Results/allgenes_genename.fa
 ## Step_3
 ### Purpose: count the amount of DNA sequences, modify header names and count sequence lengths.
 
-Use the command "grep" in order to count the amound of DNA sequences in the FASTA file.
+Run the shell script **step_3a.sh** in your terminal to count the amount of DNA sequences in your FASTA file
+
+Run the python script **Step_3.py** in your terminal in order to determine the DNA sequence length for each ID.
+
+Open the FASTA file in your texteditor (jEdit). Use regular expression in order to modify the header names.
+
+Replace PREDICTED\s for nothing, in order to remove this part of the headers.
+
+```
+Search for: PREDICTED:\s
+Replace with: 
+```
+
+Take a header name and define in regular expressions where to search for.
+
+**>NM_009432.2 Mus musculus thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA**
+
+```
+Search for: (>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+
+Replace with:$1$2_$3
+```
+
+This gives: **>Mus_musculus** as new header.
+
+
+Save the modified file as: ** *_mod.fasta**
 
 ## Step_4
 ### Purpose: Align genes and build a tree
@@ -94,7 +119,7 @@ Sequences should all be in 1 file.
 NBRF/PIR, EMBL/SwissProt, Pearson (Fasta), GDE, Clustal, GCG/MSF,                  RSF.
 ```
 
-Enter the name of the sequence file, including all genes of interest:
+Enter the name of the sequence file which includes all genes of interest:
 
 ```
 Enter the name of the sequence file : allgenes_genename.fa
@@ -268,7 +293,7 @@ Python 2.7.12 (default, Dec  4 2017, 14:50:18)
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
-Import the module Phylo from biopython and draw a tree from the output file (*.dnd) from the CLUSTAL multiple aligment that we just performed. 
+Import the module Phylo from biopython and draw a phylogenetic tree from the output file (*.dnd) from the CLUSTAL multiple aligment that we just performed. 
 ```
 >>> from Bio import Phylo
 >>> tree = Phylo.read("genes.dnd", "newick")
