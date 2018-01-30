@@ -56,12 +56,232 @@ cd ~/PBfB2018/Step1/Data
 cat *fa > ~/PBfB2018/Step2/Results/allgenes_genename.fa
 ```
 
-## Step_2
+## Step_3
 ### Purpose: count the amount of DNA sequences, modify header names and count sequence lengths.
 
+Use the command "grep" in order to count the amound of DNA sequences in the FASTA file.
+
+## Step_4
+### Purpose: Align genes and build a tree
+
+Use the command "clustalw" in your terminal in order to start a CLUSTAL multiple sequence alignment.
+
+```
+laura@laura-VirtualBox:~/PBfB2018/Step2/Results$ clustalw
+
+
+ **************************************************************
+ ******** CLUSTAL 2.1 Multiple Sequence Alignments  ********
+ **************************************************************
+
+
+     1. Sequence Input From Disc
+     2. Multiple Alignments
+     3. Profile / Structure Alignments
+     4. Phylogenetic trees
+
+     S. Execute a system command
+     H. HELP
+     X. EXIT (leave program)
+
+
+Your choice: 1
+
+
+Sequences should all be in 1 file.
+
+7 formats accepted: 
+NBRF/PIR, EMBL/SwissProt, Pearson (Fasta), GDE, Clustal, GCG/MSF,                  RSF.
+```
+
+Enter the name of the sequence file, including all genes of interest:
+
+```
+Enter the name of the sequence file : allgenes_genename.fa
+Sequence format is Pearson
+Sequences assumed to be DNA
+
+
+Sequence 1: NM_009432.2      645 bp
+Sequence 2: XM_005357118.1   537 bp
+Sequence 3: XM_013118100.2   499 bp
+Sequence 4: XM_015999206.1  1518 bp
 
 
 
+ **************************************************************
+ ******** CLUSTAL 2.1 Multiple Sequence Alignments  ********
+ **************************************************************
+
+
+     1. Sequence Input From Disc
+     2. Multiple Alignments
+     3. Profile / Structure Alignments
+     4. Phylogenetic trees
+
+     S. Execute a system command
+     H. HELP
+     X. EXIT (leave program)
+
+
+Your choice: 2
+
+
+
+****** MULTIPLE ALIGNMENT MENU ******
+
+
+    1.  Do complete multiple alignment now Slow/Accurate
+    2.  Produce guide tree file only
+    3.  Do alignment using old guide tree file
+
+    4.  Toggle Slow/Fast pairwise alignments = SLOW
+
+    5.  Pairwise alignment parameters
+    6.  Multiple alignment parameters
+
+    7.  Reset gaps before alignment? = OFF
+    8.  Toggle screen display          = ON
+    9.  Output format options
+    I. Iteration = NONE
+
+    S.  Execute a system command
+    H.  HELP
+    or press [RETURN] to go back to main menu
+
+
+Your choice: 8
+
+
+
+****** MULTIPLE ALIGNMENT MENU ******
+
+
+    1.  Do complete multiple alignment now Slow/Accurate
+    2.  Produce guide tree file only
+    3.  Do alignment using old guide tree file
+
+    4.  Toggle Slow/Fast pairwise alignments = SLOW
+
+    5.  Pairwise alignment parameters
+    6.  Multiple alignment parameters
+
+    7.  Reset gaps before alignment? = OFF
+    8.  Toggle screen display          = OFF
+    9.  Output format options
+    I. Iteration = NONE
+
+    S.  Execute a system command
+    H.  HELP
+    or press [RETURN] to go back to main menu
+
+
+Your choice: 1
+```
+
+Enter a name for the CLUSTAL output file, ending with .aln:
+
+```
+Enter a name for the CLUSTAL output file  [allgenes_genename.aln]: genes.aln
+Start of Pairwise alignments
+Aligning...
+
+Sequences (1:2) Aligned. Score:  86
+Sequences (1:3) Aligned. Score:  83
+Sequences (1:4) Aligned. Score:  68
+Sequences (2:3) Aligned. Score:  84
+Sequences (2:4) Aligned. Score:  83
+Sequences (3:4) Aligned. Score:  88
+```
+
+Enter a name for the output file containing the phylogenetic tree, ending with .dnd:
+```
+Enter name for new GUIDE TREE           file   [allgenes_genename.dnd]: genes.dnd
+
+Guide tree file created:   [genes.dnd]
+
+There are 3 groups
+Start of Multiple Alignment
+
+Aligning...
+Group 1: Sequences:   2      Score:8910
+Group 2: Sequences:   3      Score:9004
+Group 3: Sequences:   4      Score:9441
+Alignment Score 18863
+
+
+
+Consensus length = 1525 
+
+CLUSTAL-Alignment file created  [genes.aln]
+
+
+
+****** MULTIPLE ALIGNMENT MENU ******
+
+
+    1.  Do complete multiple alignment now Slow/Accurate
+    2.  Produce guide tree file only
+    3.  Do alignment using old guide tree file
+
+    4.  Toggle Slow/Fast pairwise alignments = SLOW
+
+    5.  Pairwise alignment parameters
+    6.  Multiple alignment parameters
+
+    7.  Reset gaps before alignment? = OFF
+    8.  Toggle screen display          = OFF
+    9.  Output format options
+    I. Iteration = NONE
+
+    S.  Execute a system command
+    H.  HELP
+    or press [RETURN] to go back to main menu
+
+
+Your choice: 
+
+
+
+ **************************************************************
+ ******** CLUSTAL 2.1 Multiple Sequence Alignments  ********
+ **************************************************************
+
+
+     1. Sequence Input From Disc
+     2. Multiple Alignments
+     3. Profile / Structure Alignments
+     4. Phylogenetic trees
+
+     S. Execute a system command
+     H. HELP
+     X. EXIT (leave program)
+```
+
+Open python in your terminal by just typing: "python"
+
+```
+Your choice: x
+laura@laura-VirtualBox:~/PBfB2018/Step2/Results$ python
+Python 2.7.12 (default, Dec  4 2017, 14:50:18) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+Import the module Phylo from biopython and draw a tree from the output file (*.dnd) from the CLUSTAL multiple aligment that we just performed. 
+```
+>>> from Bio import Phylo
+>>> tree = Phylo.read("genes.dnd", "newick")
+>>> Phylo.draw_ascii(tree)
+                            ____________________________________ NM_009432.2
+  _________________________|
+ |                         |_______ XM_005357118.1
+_|
+ |____ XM_013118100.2
+ |
+ |______________________________ XM_015999206.1
+
+```
 
 
 
