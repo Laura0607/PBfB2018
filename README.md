@@ -12,7 +12,7 @@ Use a consistent structure for you project:
 
 ## Description:
 
-## Step_1: Download a batch of FASTA files containing genes of interestfrom NCBI and save it in a new directory.
+## **Step_1**: Download a batch of FASTA files containing genes of interestfrom NCBI and save it in a new directory.
 
 Make a list of IDs of DNA sequences that you would like to download from NCBI.The IDs for genes can be found at the NCBI website by entering the gene name + species name. 
 Save this list as a .txt file in the Data_1 directory: **~/PBfB2018/Step_1/Data_1**
