@@ -457,7 +457,7 @@ Plot the tree and export it as a SVG picture file:
 nw_display -s -S -v 25 -b ’opacity:0’ -i ’font-size:8’ trimtest.phy_phyml_tree > test.phy_phyml_tree.svg
 ```
 
-[Phylogenetic tree](/test.phy_phyml_tree.svg)
+![Phylogenetic tree](/test.phy_phyml_tree.svg)
 
 ## Step_7: Building a tree with the R package "ape".
 
