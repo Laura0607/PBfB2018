@@ -436,11 +436,11 @@ Run the script **step_4b.py** to print a phylogenetic tree for your multiple seq
 
 ## Step_5: Cleaning and trimming a multiple sequence alignment by using " trimAl"
 
-Runs the script **step_5.sh** to trim the alignment 
+Runs the script **step_5.sh** to trim the alignment.
 In this script the trimAl tool is used combined with an automatic method to decide the optimal thresholds for trimming.
 Parameters can be changed by changing the script.
-Output will be saved with a PHYLIP format 
-Also an HTML file will be created containing the trimAl's trimming summary.
+Output will be saved as a file with a PHYLIP format. 
+Also a HTML file will be created containing the trimAl's trimming summary.
 
 
 
@@ -493,7 +493,8 @@ git clone https://github.com/Laura0607/PBfB2018.git
 3. step_3b.py		Determines sequence length 
 4. step_4a.sh		Multiple sequence alignment (clustalw)
 5. step_4b.py		Build a phylogenetic tree (Phylo)
-6. 
+6. step_5.sh		Cleaning and trimming a multiple sequence alignment (trimAl)
+
 
 
 
