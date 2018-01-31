@@ -108,9 +108,7 @@ This tool is build in in the script: **step_4.sh**
 Runs this script in order to perform a multiple alignment, the output file will be saved as a PHYLIP file.
 However, this might be changed into another format by changing the script. 
 
-
-
-	or 
+or: 
 Use the command ***"clustalw"*** in your terminal in order to start a CLUSTALW multiple sequence alignment.
 
 ```
@@ -433,25 +431,46 @@ _|   |
 >>> 
 ```
 
-	or
+or:
 Run the script **step_4b.py** to print a phylogenetic tree for your multiple sequence alignment.
 
-## Step_5: Building a tree with the R package "ape".
+## Step_5: Cleaning and trimming a multiple sequence alignment by using " trimAl"
+
+Runs the script **step_5.sh** to trim the alignment 
+In this script the trimAl tool is used combined with an automatic method to decide the optimal thresholds for trimming.
+Parameters can be changed by changing the script.
+Output will be saved with a PHYLIP format 
+Also an HTML file will be created containing the trimAl's trimming summary.
 
 
 
-## Step_6: Combine a reference DNA sequence and short DNA sequences from different samples in 1 FASTA file.
+
+
+## Step_6: Building a tree with the R package "ape".
+
+
+
+
+
+
+
+
+
+
+
+
+## Step_7: Combine a reference DNA sequence and short DNA sequences from different samples in 1 FASTA file.
 
 The same procedure as in Step_2 will be used in order to combnine the files. 
 Use the command line in the terminal in order to combine the files into one FASTA file.
-Save this new file in the Results_6 directory within the Step_6 directory:
+Save this new file in the Results_7 directory within the Step_7 directory:
 
 ```
-cd ~/PBfB2018/Step_6/Data_6/
-cat *fa > ~/PBfB2018/Step_6/Results_6/all.fa
+cd ~/PBfB2018/Step_7/Data_7/
+cat *fa > ~/PBfB2018/Step_7/Results_7/all.fa
 ```
 
-## Step_7: Multiple sequence alignment and trimming the alignments.
+## Step_8: Multiple sequence alignment and trimming the alignments.
 
 Perform a multiple sequence alignment by using the tool **"clustalw"** as shown in Step_4.
 Since the reference DNA sequence is much longer compared to the other sequences, it will be useful to trim the alignments in such a way that only the covered part will be visible.
@@ -469,12 +488,12 @@ git clone https://github.com/Laura0607/PBfB2018.git
 
 ## Scripts
 
-1. step_1.py
-2. step_3a.sh
-3. step_3b.py
-4. step_4.py
-5. 
-
+1. step_1.py		Download FASTA files from NCBI 
+2. step_3a.sh		Count the number of sequences in a FASTA file
+3. step_3b.py		Determines sequence length 
+4. step_4a.sh		Multiple sequence alignment (clustalw)
+5. step_4b.py		Build a phylogenetic tree (Phylo)
+6. 
 
 
 
