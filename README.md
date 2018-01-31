@@ -12,7 +12,7 @@ Use a consistent structure for you project:
 
 ## Description:
 
-## **Step_1**: Download a batch of FASTA files containing genes of interestfrom NCBI and save it in a new directory.
+## Step_1: Download a batch of FASTA files containing genes of interestfrom NCBI and save it in a new directory.
 
 Make a list of IDs of DNA sequences that you would like to download from NCBI.The IDs for genes can be found at the NCBI website by entering the gene name + species name. 
 Save this list as a .txt file in the Data_1 directory: **~/PBfB2018/Step_1/Data_1**
@@ -424,8 +424,21 @@ _|    |
 ## Step_5: Modify the names in the tree into human readable names 
 
 
+## Step_6: Combine a reference DNA sequence and short DNA sequences from different samples in 1 FASTA file.
 
+The same procedure as in Step_2 will be used in order to combnine the files. 
+Use the command line in the terminal in order to combine the files into one FASTA file.
+Save this new file in the Results_6 directory within the Step_6 directory:
 
+```
+cd ~/PBfB2018/Step_6/Data_6/
+cat *fa > ~/PBfB2018/Step_6/Results_6/all.fa
+```
+
+## Step_7: Multiple sequence alignment and trim alignments.
+
+Perform a multiple sequence alignment by using the tool **"clustalw"** as shown in Step_4.
+Since the reference DNA sequence is much longer compared to the other sequences, it will be useful to trim the alignments in such a way that only the covered part will be visible.
 
 
 
