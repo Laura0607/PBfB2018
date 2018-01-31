@@ -68,7 +68,7 @@ Save this new file in the Results_2 directory within the Step_2 directory:
 cd ~/PBfB2018/Step_1/Data_1/outTSHb/
 cat *fa > ~/PBfB2018/Step_2/Results_2/all_TSHb.fa
 ```
-	or
+or:
 Run the fowllowing script: **step_2.sh**
 
 ## Step_3: Count the amount of DNA sequences, count sequence lengths and modify header names.
@@ -89,7 +89,7 @@ Replace with:
 
 Take a header name and define in regular expressions where to search for.
 
-**>NM_009432.2 Mus musculus thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA*
+*>NM_009432.2 Mus musculus thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA*
 
 ```
 Search for: (>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+
@@ -127,7 +127,7 @@ echo "the FASTA file with modified header names has been saved as: all_TSHb3.fa"
 ## Step_4: Multiple sequence alignments and building a tree. 
 
 Use the tool **clustalw** to perform a multiple sequence alignment
-This tool is build in in the script: **step_4.sh**
+This tool is build in in the script: **step_4a.sh**
 Runs this script in order to perform a multiple alignment, the output file will be saved as a PHYLIP file.
 However, this might be changed into another format by changing the script. 
 
@@ -482,9 +482,14 @@ nw_display -s -S -v 25 -b ’opacity:0’ -i ’font-size:8’ trimtest.phy_phym
 
 ![Phylogenetic tree](/test.phy_phyml_tree.svg)
 
-## Step_7: Building a tree with the R package "ape".
+## Step_7: Building a phylogenetic tree with the R package "ape".
 
+Install and load the following R packages:
+* install.packages('ape')
+* install.packages('ctv')
+* install.views('Phylogenetics')
 
+library(ape)
 
 
 
@@ -530,6 +535,7 @@ git clone https://github.com/Laura0607/PBfB2018.git
 4. step_4a.sh		Multiple sequence alignment (clustalw)
 5. step_4b.py		Build a phylogenetic tree (Phylo)
 6. step_5.sh		Cleaning and trimming a multiple sequence alignment (trimAl)
+7. step_6.sh		Build a phylogenetic tree (phyml)
 
 
 
