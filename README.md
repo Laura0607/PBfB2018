@@ -89,17 +89,40 @@ Replace with:
 
 Take a header name and define in regular expressions where to search for.
 
-**>NM_009432.2 Mus musculus thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA**
+**>NM_009432.2 Mus musculus thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA*
 
 ```
 Search for: (>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+
 Replace with:$1$2_$3
 ```
+This gives: **">Mus_musculus"** as new header.
+Save the modified file as: **all_genename_mod.fa**
 
+or:
+Run the shell script: **step_3c.sh**
+
+### step_3c.sh:
+Command line expression using perl for conducting a search / replace using regular expressions.
+Replace all "PREDIDCTED:\s" by nothing and save it in a new file.
+```
+perl -pe 's/PREDICTED:\s//g' all_TSHb.fa > all_TSHb2.fa
+```
+Modify the header names by using regular expressions and save the output into a new file.
+```
+perl -pe 's/^(>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+/\1\2_\3/g' all_TSHb2.fa > all_TSHb3.fa
+```
 This gives: **">Mus_musculus"** as new header.
 
+Print the header names to check whether the names are modified in a proper way:
+```
+grep ">" ~/PBfB2018/Step_2/Results_2/all_TSHb3.fa
 
-Save the modified file as: **all_genename_mod.fa**
+```
+
+Confirm that the program has been finished and files are saved:
+```
+echo "the FASTA file with modified header names has been saved as: all_TSHb3.fa"
+```
 
 ## Step_4: Multiple sequence alignments and building a tree. 
 
