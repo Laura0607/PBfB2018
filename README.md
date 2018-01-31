@@ -436,17 +436,28 @@ Run the script **step_4b.py** to print a phylogenetic tree for your multiple seq
 
 ## Step_5: Cleaning and trimming a multiple sequence alignment by using " trimAl"
 
-Runs the script **step_5.sh** to trim the alignment.
+Run the script **step_5.sh** to trim the alignment.
 In this script the trimAl tool is used combined with an automatic method to decide the optimal thresholds for trimming.
 Parameters can be changed by changing the script.
 Output will be saved as a file with a PHYLIP format. 
 Also a HTML file will be created containing the trimAl's trimming summary.
 
+## Step_6: Building a phylogenetic tree with "phyml" 
 
+Run the shell script **step_6.sh** to build a phylogenetic tree with "phyml".
 
+### step_6.sh:
+Estimating the best phylogenetic tree:
+```
+phyml -i trimtest.phy -d nt -n 1 -m HKY85
+```
 
+Pot the tree and export it as a SVG picture file:
+```
+nw_display -s -S -v 25 -b ’opacity:0’ -i ’font-size:8’ trimtest.phy_phyml_tree > test.phy_phyml_tree.svg
+```
 
-## Step_6: Building a tree with the R package "ape".
+## Step_7: Building a tree with the R package "ape".
 
 
 
