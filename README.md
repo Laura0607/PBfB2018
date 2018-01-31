@@ -12,7 +12,7 @@ Use a consistent structure for you project:
 
 ## Description:
 
-## Step_1: Download a batch of FASTA files containing genes of interestfrom NCBI and save it in a new directory.
+## Step_1: Download a batch of FASTA files containing genes of interest from NCBI and save it in a new directory.
 
 Make a list of IDs of DNA sequences that you would like to download from NCBI.The IDs for genes can be found at the NCBI website by entering the gene name + species name. 
 Save this list as a .txt file in the Data_1 directory: **~/PBfB2018/Step_1/Data_1**
@@ -90,11 +90,12 @@ Take a header name and define in regular expressions where to search for.
 **>NM_009432.2 Mus musculus thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA**
 
 ```
-Search for: (>\w+.+\d+\.\d+)\s(\w+)\s(\w+).+
-Replace with:$1 $2 $3
+Search for: (>\w+.+\d+\.\d+)\s(\w+)\s(\w+)(.+)
+Replace with:$1_$2_$3 $4
 ```
 
-This gives: **">NM_009432.2 Mus musculus"** as new header.
+This gives: **">NM_009432.2_Mus_musculus  thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA
+"** as new header.
 
 
 Save the modified file as: **all_genename_mod.fa**
@@ -378,45 +379,45 @@ Import the module Phylo from biopython and draw a phylogenetic tree from the out
 >>> from Bio import Phylo
 >>> tree = Phylo.read("TSHb.dnd", "newick")
 >>> Phylo.draw_ascii(tree)
-                  _______________ NM_009432.2
-                 |
-             ____|                ___________________________ XM_008761373.2
-            |    |       ________|
-            |    |______|        | XM_021196788.1
-           ,|           |
-           ||           | XM_021158911.1
-           ||
-           ||      , XM_013118100.2
-       ____||______|
-      |    |       |         _____________________________ XM_015999206.1
-      |    |       |________|
-      |    |                | XM_016965986.1
-      |    |
-  ____|    |______ XM_005357117.1
- |    |
- |    |               _________ XM_004853785.2
- |    |     _________|
- |    |  __|         |______ XM_010631214.1
- |    | |  |
- |    |_|  |___________________ XM_013516550.1
- |      |
- |      |____ XM_008834013.1
+          ________ NM_009432.2_Mus_musculus
+          |
+        __|         _______________ XM_008761373.2_Rattus_norvegicus
+       |  |    ____|
+       |  |___|    | XM_021196788.1_Mus_pahari
+      ,|      |
+      ||      | XM_021158911.1_Mus_caroli
+      ||
+      ||   , XM_013118100.2_Mesocricetus_auratus
+     _||___|
+    | |    |     ________________ XM_015999206.1_Peromyscus_maniculatus
+    | |    |____|
+    | |         | XM_016965986.1_Cricetulus_griseus
+    | |
+  __| |____ XM_005357117.1_Microtus_ochrogaster
+ |  |
+ |  |        _____ XM_004853785.2_Heterocephalus_glaber
+ |  |  _____|
+ |  |,|     |___ XM_010631214.1_Fukomys_damarensis
+ |  |||
+ |  |||___________ XM_013516550.1_Chinchilla_lanigera
+ |   |
+ |   |_ XM_008834013.1_Nannospalax_galili
  |
- |                  _______________________ XM_003479258.3
- |         ________|
- |     ___|        |_____________ XM_015502221.1
- |    |   |
- |____|   |_______________________ XM_004641668.2
-_|    |
- |    |_______ XM_004581882.1
+ |          _____________ XM_003479258.3_Cavia_porcellus
+ |     ____|
+ |   _|    |_______ XM_015502221.1_Marmota_marmota
+ |  | |
+ |__| |____________ XM_004641668.2_Octodon_degus
+_|  |
+ |  |___ XM_004581882.1_Ochotona_princeps
  |
- |    ______ XM_004667534.1
- |___|
- |   |______________________ XM_021732975.1
+ |  ___ XM_004667534.1_Jaculus_jaculus
+ |_|
+ | |____________ XM_021732975.1_Ictidomys_tridecemline...
  |
- |   , XM_013024632.1
- |___|
-     |_____________________ XM_020157368.1
+ | , XM_013024632.1_Dipodomys_ordii
+ |_|
+   |____________ XM_020157368.1_Castor_canadensis
 
 >>> 
 ```
