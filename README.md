@@ -435,7 +435,7 @@ cd ~/PBfB2018/Step_6/Data_6/
 cat *fa > ~/PBfB2018/Step_6/Results_6/all.fa
 ```
 
-## Step_7: Multiple sequence alignment and trim alignments.
+## Step_7: Multiple sequence alignment and trimming the alignments.
 
 Perform a multiple sequence alignment by using the tool **"clustalw"** as shown in Step_4.
 Since the reference DNA sequence is much longer compared to the other sequences, it will be useful to trim the alignments in such a way that only the covered part will be visible.
@@ -453,10 +453,12 @@ git clone https://github.com/Laura0607/PBfB2018.git
 
 ## Scripts
 
-1.
-2.
-3.
-4.
+1. step_1.py
+2. step_3a.sh
+3. step_3b.py
+4. step_4.py
+5. 
+
 
 
 
