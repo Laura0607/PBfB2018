@@ -90,12 +90,11 @@ Take a header name and define in regular expressions where to search for.
 **>NM_009432.2 Mus musculus thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA**
 
 ```
-Search for: (>\w+.+\d+\.\d+)\s(\w+)\s(\w+)(.+)
-Replace with:$1_$2_$3 $4
+Search for: (>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+
+Replace with:$1$2_$3
 ```
 
-This gives: **">NM_009432.2_Mus_musculus  thyroid stimulating hormone, beta subunit (Tshb), transcript variant 1, mRNA
-"** as new header.
+This gives: **">Mus_musculus"** as new header.
 
 
 Save the modified file as: **all_genename_mod.fa**
@@ -379,50 +378,50 @@ Import the module Phylo from biopython and draw a phylogenetic tree from the out
 >>> from Bio import Phylo
 >>> tree = Phylo.read("TSHb.dnd", "newick")
 >>> Phylo.draw_ascii(tree)
-          ________ NM_009432.2_Mus_musculus
-          |
-        __|         _______________ XM_008761373.2_Rattus_norvegicus
-       |  |    ____|
-       |  |___|    | XM_021196788.1_Mus_pahari
-      ,|      |
-      ||      | XM_021158911.1_Mus_caroli
-      ||
-      ||   , XM_013118100.2_Mesocricetus_auratus
-     _||___|
-    | |    |     ________________ XM_015999206.1_Peromyscus_maniculatus
-    | |    |____|
-    | |         | XM_016965986.1_Cricetulus_griseus
-    | |
-  __| |____ XM_005357117.1_Microtus_ochrogaster
- |  |
- |  |        _____ XM_004853785.2_Heterocephalus_glaber
- |  |  _____|
- |  |,|     |___ XM_010631214.1_Fukomys_damarensis
- |  |||
- |  |||___________ XM_013516550.1_Chinchilla_lanigera
+              ____________ Mus_musculus
+              |
+           ___|            ______________________ Rattus_norvegicus
+          |   |     ______|
+          |   |____|      | Mus_pahari
+         ,|        |
+         ||        | Mus_caroli
+         ||
+         ||    , Mesocricetus_auratus
+      ___||____|
+     |   |     |       _______________________ Peromyscus_maniculatus
+     |   |     |______|
+     |   |            | Cricetulus_griseus
+     |   |
+  ___|   |_____ Microtus_ochrogaster
  |   |
- |   |_ XM_008834013.1_Nannospalax_galili
+ |   |            _______ Heterocephalus_glaber
+ |   |    _______|
+ |   | __|       |____ Fukomys_damarensis
+ |   ||  |
+ |   ||  |_______________ Chinchilla_lanigera
+ |    |
+ |    |___ Nannospalax_galili
  |
- |          _____________ XM_003479258.3_Cavia_porcellus
- |     ____|
- |   _|    |_______ XM_015502221.1_Marmota_marmota
- |  | |
- |__| |____________ XM_004641668.2_Octodon_degus
-_|  |
- |  |___ XM_004581882.1_Ochotona_princeps
+ |              ___________________ Cavia_porcellus
+ |       ______|
+ |    __|      |__________ Marmota_marmota
+ |   |  |
+ |___|  |__________________ Octodon_degus
+_|   |
+ |   |______ Ochotona_princeps
  |
- |  ___ XM_004667534.1_Jaculus_jaculus
- |_|
- | |____________ XM_021732975.1_Ictidomys_tridecemline...
+ |   _____ Jaculus_jaculus
+ |__|
+ |  |_________________ Ictidomys_tridecemlineatus
  |
- | , XM_013024632.1_Dipodomys_ordii
- |_|
-   |____________ XM_020157368.1_Castor_canadensis
-
+ |  , Dipodomys_ordii
+ |__|
+    |_________________ Castor_canadensis
+    
 >>> 
 ```
 
-## Step_5: Modify the names in the tree into human readable names 
+## Step_5: Build a tree with the ETE3 toolkit
 
 
 ## Step_6: Combine a reference DNA sequence and short DNA sequences from different samples in 1 FASTA file.
