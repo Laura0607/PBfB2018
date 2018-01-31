@@ -68,6 +68,8 @@ Save this new file in the Results_2 directory within the Step_2 directory:
 cd ~/PBfB2018/Step_1/Data_1/outTSHb/
 cat *fa > ~/PBfB2018/Step_2/Results_2/all_TSHb.fa
 ```
+	or
+Run the fowllowing script: **step_2.sh**
 
 ## Step_3: Count the amount of DNA sequences, count sequence lengths and modify header names.
 
@@ -101,6 +103,14 @@ Save the modified file as: **all_genename_mod.fa**
 
 ## Step_4: Multiple sequence alignments and building a tree. 
 
+Use the tool **clustalw** to perform a multiple sequence alignment
+This tool is build in in the script: **step_4.sh**
+Runs this script in order to perform a multiple alignment, the output file will be saved as a PHYLIP file.
+However, this might be changed into another format by changing the script. 
+
+
+
+	or 
 Use the command ***"clustalw"*** in your terminal in order to start a CLUSTALW multiple sequence alignment.
 
 ```
@@ -373,10 +383,12 @@ Python 2.7.12 (default, Dec  4 2017, 14:50:18)
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
-Import the module Phylo from biopython and draw a phylogenetic tree from the output file (*.dnd) from the CLUSTAL multiple aligment that we just performed. 
+
+
+Import the module Phylo from biopython and draw a phylogenetic tree from the output file (*.dnd) from the CLUSTAL multiple alignment that we just performed. 
 ```
 >>> from Bio import Phylo
->>> tree = Phylo.read("TSHb.dnd", "newick")
+>>> tree = Phylo.read("test.dnd", "newick")
 >>> Phylo.draw_ascii(tree)
               ____________ Mus_musculus
               |
@@ -421,7 +433,11 @@ _|   |
 >>> 
 ```
 
-## Step_5: Build a tree with the ETE3 toolkit
+	or
+Run the script **step_4b.py** to print a phylogenetic tree for your multiple sequence alignment.
+
+## Step_5: Building a tree with the R package "ape".
+
 
 
 ## Step_6: Combine a reference DNA sequence and short DNA sequences from different samples in 1 FASTA file.
