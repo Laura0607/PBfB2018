@@ -74,9 +74,7 @@ cat *fa > ~/PBfB2018/Step_2/Results_2/all_TSHb.fa
 
 ## Step_3: Count the amount of DNA sequences, count sequence lengths and modify header names.
 
-Run the shell script **step_3a.sh** in your terminal to count the amount of DNA sequences in your FASTA file
-
-Run the python script **step_3b.py** in your terminal in order to determine the DNA sequence length for each ID and save this as a .txt file..
+Run the python script **step_3a.py** in your terminal in order to determine the DNA sequence length for each ID and save this as a .txt file..
 Furthermore this programme prints the amount of sequences in your fasta file.
 
 Open the FASTA file in your texteditor (jEdit). Use regular expression in order to modify the header names.
@@ -100,9 +98,16 @@ This gives: **">Mus_musculus"** as new header.
 Save the modified file as: **all_genename_mod.fa**
 
 or:
-Run the shell script: **step_3c.sh**
+Run the shell script: **step_3b.sh**
 
-### step_3c.sh:
+### step_3b.sh:
+linking the Data_3 to Results_3.
+Change the working directory into the directory where the input file (all_TSHb.fa) is located.
+```
+ln -s /home/laura/PBfB2018/Step_3/Data_3/* /home/laura/PBfB2018/Step_3/Results_3/.
+cd ~/PBfB2018/Step_3/Results_3
+```
+
 Command line expression using perl for conducting a search / replace using regular expressions.
 Replace all "PREDIDCTED:\s" by nothing and save it in a new file.
 ```
@@ -127,8 +132,8 @@ echo "the FASTA file with modified header names has been saved as: all_TSHb3.fa"
 
 ## Step_4: Multiple sequence alignments and building a tree. 
 
-Use the tool **clustalw** to perform a multiple sequence alignment
-This tool is build in in the script: **step_4a.sh**
+Use the tool **clustalw** to perform a multiple sequence alignment.
+This tool is build into the script: **step_4a.sh**
 Runs this script in order to perform a multiple alignment, the output file will be saved as a PHYLIP file.
 However, this might be changed into another format by changing the script. 
 
@@ -408,7 +413,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 
 Import the module Phylo from biopython and draw a phylogenetic tree from the output file (*.dnd) from the CLUSTAL multiple alignment that we just performed. 
-```
+```python
 >>> from Bio import Phylo
 >>> tree = Phylo.read("test.dnd", "newick")
 >>> Phylo.draw_ascii(tree)
