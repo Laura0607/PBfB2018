@@ -20,7 +20,7 @@ In this example I will make a list with the gene "TSHb" for different rodent spe
 
 Use this list as <genome_id_list> in the script **step_1.py**.
 
-Run the python script **step_1.py** in order to download the FASTA files form NCBI
+Run the python script **step_1.py** in order to download the FASTA files from NCBI.
 
 The following parts are included in this script:
 
@@ -43,33 +43,34 @@ import time
 The program will ask you to enter a <genome_id_list>, this is a .txt file containing the IDs from the genes of interest that you would like to download from NCBI.
 In this example we will enter: "TSHb.txt" here.
 The program will ask you to define <out_dir>, define here a name of a new outputdirectory where you would like to save the FASTA files.
-In this example we will enter: **~/PBfB2018/Step_1/Results_1/outTSHb**
+In this example we will enter: **~/PBfB2018/Step_1/Results_1/OutputTSHb**
 
 Make sure your current working directory is the same directory as where your input file is located.
-So we will enter in the terminal: 
-```
-laura@laura-VirtualBox:~/PBfB2018/Step_1/Data_1$ step_1.py TSHb.txt ~/PBfB2018/Step_1/Results_1/outTSHb
-
-```
+The program will automatically change the working directory into **~/PBfB2018/Step_1/Data_1/.**
 
 The url_template is used to retrieve FASTA files from NCBI.
 ```python
 url_template = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=%s&rettype=fasta&retmode=text"
 ```
 
-The program retrieves the FASTA file for each ID in the input list, and saves this as "ID#.fa" in the new directory. 
+The program loops trough the commands and retrieves the FASTA file for each ID that are listed in the input file, and saves this as "ID#.fa" in the new directory. 
 
 
 ## Step_2: Combine the downloaded genes into one file named **"all_genename.fa"**.
 
-Use the command line in the terminal in order to combine the downloaded files into one FASTA file.
-Save this new file in the Results_2 directory within the Step_2 directory:
+Run the fowllowing script: **step_2.sh**:
+
+Linking your results from step_1 to the directoru Data_2.
+Change directory into the directory where your fasta files are linked to 
+use the "cat" command in order to concatenate all sequences into 1 FASTA file.
+Save this new file in the Results_2 directory.
+
 ```
+ln -s /home/laura/PBfB2018/Step_1/Results_1/OutputTSHb/* /home/laura/PBfB2018/Step_2/Data_2/.
 cd ~/PBfB2018/Step_1/Data_1/outTSHb/
 cat *fa > ~/PBfB2018/Step_2/Results_2/all_TSHb.fa
 ```
-or:
-Run the fowllowing script: **step_2.sh**
+
 
 ## Step_3: Count the amount of DNA sequences, count sequence lengths and modify header names.
 
