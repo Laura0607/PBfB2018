@@ -10,7 +10,7 @@ Use a consistent structure for you project:
 * Create subdirectories for each step of the project.
 * Each subdirectory must include 3 directories: Data, Code, Results 
 
-## Description:
+## Description: 
 
 ## Step_1: Download a batch of FASTA files containing genes of interest from NCBI and save it in a new directory.
 
