@@ -621,6 +621,8 @@ phyml -i trim_TSHb.nex -d nt -n 1 -m HKY85 #estimating the best phylogenetic tre
 #remove distance numbers, plot the tree and export it as a .pdf and .svg image file.
 nw_topology -I trim_TSHb.nex_phyml_tree | nw_display -s - > tree_TSHb.phy_phyml_tree.pdf  #-S -v 50 -b ’opacity:1’ -i ’font-size:8’ #trim_TSHb.nex_phyml_tree > tree_TSHb.phy_phyml_tree.svg 
 nw_topology -I trim_TSHb.nex_phyml_tree | nw_display -s - > tree_TSHb.phy_phyml_tree.svg  #-S -v 50 -b ’opacity:1’ -i ’font-size:8’ #trim_TSHb.nex_phyml_tree > tree_TSHb.phy_phyml_tree.svg 
+
+ln -s /home/laura/PBfB2018/Step_6/Data_6* /home/laura/PBfB2018/Step_6/Results_6/.
 ```
 ![Phylogenetic tree TSHb](/tree_TSHb.phy_phyml_tree.svg)
 
@@ -631,15 +633,11 @@ Install and load the following R packages:
 * install.packages('ctv')
 * install.views('Phylogenetics')
 
+```
 library(ape)
+MyTree <- read.nexus("trim_TSHb.nex")
 
-
-
-
-
-
-
-
+**WORK IN PROGRESS**
 
 
 ## Step_7: Combine a reference DNA sequence and short DNA sequences from different samples in 1 FASTA file.
@@ -653,13 +651,14 @@ cd ~/PBfB2018/Step_7/Data_7/
 cat *fa > ~/PBfB2018/Step_7/Results_7/all.fa
 ```
 
+**WORK IN PROGRESS**
+
 ## Step_8: Multiple sequence alignment and trimming the alignments.
 
 Perform a multiple sequence alignment by using the tool **"clustalw"** as shown in Step_4.
 Since the reference DNA sequence is much longer compared to the other sequences, it will be useful to trim the alignments in such a way that only the covered part will be visible.
 
-
-
+**WORK IN PROGRESS**
 
 
 ## Clone this repository
@@ -671,13 +670,14 @@ git clone https://github.com/Laura0607/PBfB2018.git
 
 ## Scripts
 
-1. step_1.py		Download FASTA files from NCBI 
-2. step_3a.sh		Count the number of sequences in a FASTA file
-3. step_3b.py		Determines sequence length 
-4. step_4a.sh		Multiple sequence alignment (clustalw)
-5. step_4b.py		Build a phylogenetic tree (Phylo)
-6. step_5.sh		Cleaning and trimming a multiple sequence alignment (trimAl)
-7. step_6.sh		Build a phylogenetic tree (phyml)
+1. step_1.py		Download FASTA files from NCBI. 
+2. step_2.sh		Combine FASTA files into 1 file.
+3. step_3a.py		Count the number of sequences + sequence length in a FASTA file.
+4. step_3b.sh		Modifies header names in a FASTA file.
+5. step_4a.sh		Multiple sequence alignment (clustalw).
+6. step_4b.py		Build a phylogenetic tree (Phylo).
+7. step_5.sh		Cleaning and trimming a multiple sequence alignment (trimAl).
+8. step_6.sh		Build a phylogenetic tree (phyml).
 
 
 
