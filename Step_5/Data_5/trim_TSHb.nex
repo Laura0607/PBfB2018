@@ -3,7 +3,7 @@
 
 BEGIN DATA;
  DIMENSIONS NTAX=20 NCHAR=574;
- FORMAT DATATYPE=DNA INTERLEAVE=yes GAP=-;
+ FORMAT DATATYPE=DNA INTERLEAVE=yes; 
 [Name: Dipodomys_ordii			Len: 574 Check: 0]
 [Name: Castor_canadensis			Len: 574 Check: 0]
 [Name: Jaculus_jaculus			Len: 574 Check: 0]

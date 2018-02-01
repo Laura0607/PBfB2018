@@ -601,23 +601,28 @@ ln -s /home/laura/PBfB2018/Step_5/Data_5/* /home/laura/PBfB2018/Step_6/Data_6/.
 ln -s /home/laura/PBfB2018/Step_5/Data_5/* /home/laura/PBfB2018/Step_5/Results_5/.
 ```
 
-
 ## Step_6: Building a phylogenetic tree with "phyml" 
 
-Run the shell script **step_6.sh** to build a phylogenetic tree with "phyml".
+Run the shell script **step_6.sh** to build a phylogenetic tree with "phyml" and save it as .svg and .pdf image..
 
-### step_6.sh:
-Estimating the best phylogenetic tree:
-```
-phyml -i trim_TSHb.nex -d nt -n 1 -m HKY85
-```
+remove "gap" from the NEXUS file that you have created in the previous step before running step_6.sh
 
-Plot the tree and export it as a SVG picture file:
+### See below the content of script ***step_6.sh*** + annotation:
 ```
-nw_display -s -S -v 25 -b ’opacity:0’ -i ’font-size:8’ trim_TSHb.nex_phyml_tree > tree_TSHb.nex_phyml_tree.svg
-```
+#! /bin/bash
+#step_6
+#Purpose: Building a phylogenetic tree with "phyml"
+#Written by: Laura van Rosmalen
+#Date: 31.01.2018
 
-![Phylogenetic tree](/test.phy_phyml_tree.svg)
+cd ~/PBfB2018/Step_6/Data_6
+
+phyml -i trim_TSHb.nex -d nt -n 1 -m HKY85 #estimating the best phylogenetic tree
+#remove distance numbers, plot the tree and export it as a .pdf and .svg image file.
+nw_topology -I trim_TSHb.nex_phyml_tree | nw_display -s - > tree_TSHb.phy_phyml_tree.pdf  #-S -v 50 -b ’opacity:1’ -i ’font-size:8’ #trim_TSHb.nex_phyml_tree > tree_TSHb.phy_phyml_tree.svg 
+nw_topology -I trim_TSHb.nex_phyml_tree | nw_display -s - > tree_TSHb.phy_phyml_tree.svg  #-S -v 50 -b ’opacity:1’ -i ’font-size:8’ #trim_TSHb.nex_phyml_tree > tree_TSHb.phy_phyml_tree.svg 
+```
+![Phylogenetic tree TSHb](file:///home/laura/PBfB2018/Step_6/Data_6/tree_TSHb.phy_phyml_tree.svg)
 
 ## Step_7: Building a phylogenetic tree with the R package "ape".
 
