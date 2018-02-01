@@ -11,7 +11,7 @@ Use a consistent structure for you project:
 * Each subdirectory must include 3 directories: Data, Code, Results 
 
 ## Description: 
-Alignment of (photoperiodic) genes, tree building and SNP calling
+**Alignment of (photoperiodic) genes, tree building and SNP calling**
 Retrieve DNA sequences of (photoperiodic) genes from NCBI | count them | count the sequence lengths | modify header names | multiple sequence alignment | cleaning and trimming | build phylogenetic tree | plot tree | export images
 
 ## Step_1: Download a batch of FASTA files containing genes of interest from NCBI and save it in a new directory.
@@ -27,7 +27,7 @@ Make sure your current working directory is the same directory as where your inp
 The program will automatically change the working directory into **~/PBfB2018/Step_1/Data_1/.**.
 The program loops trough the commands and retrieves the FASTA file for each ID, listed in the input file, and saves this as "ID#.fa" in the new directory. 
 
-See below the content of script **step_1.py** + annotation:
+### See below the content of script ***step_1.py*** + annotation:
 ```python
 #!/usr/bin/python
 #step_1
@@ -91,7 +91,7 @@ Change the working directory into the directory where your fasta files are linke
 Use the "cat" command in order to concatenate all sequences into 1 FASTA file.
 Save this new file in the Results_2 directory with the name **all_TSHb.fa**
 
-### See below the content of script **step_2.sh** + annotation:
+### See below the content of script ***step_2.sh*** + annotation:
 ```
 #! /bin/bash
 #step_2
@@ -113,7 +113,7 @@ ln -s /home/laura/PBfB2018/Step_2/Results_2/all_TSHb.fa /home/laura/PBfB2018/Ste
 Run the python script **step_3a.py** in your terminal in order to determine the DNA sequence length for each ID and save this as a .txt file..
 Furthermore this programme prints the amount of sequences in your fasta file.
 
-### See below the content of script **step_3a.py** + annotation:
+### See below the content of script ***step_3a.py*** + annotation:
 ```python
 #!/usr/bin/python
 #Step_3
@@ -155,33 +155,28 @@ print("The sequence lengths have been saved as all_TSHb.txt") #confirms that the
 ```
 
 To modidy the header names in the FASTA file, run the shell script: **step_3b.sh**.
-### step_3b.sh:
-linking the Data_3 to Results_3.
-Change the working directory into the directory where the input file (all_TSHb.fa) is located.
+
+### See below the content of ***step_3b.sh*** + annotation:
 ```
+#! /bin/bash
+#step_3c
+#Purpose: Modify header names in a FASTA file
+#Written by: Laura van Rosmalen
+#Date: 31.01.2018
+
+#Linking the Data_3 to Results_3.
 ln -s /home/laura/PBfB2018/Step_3/Data_3/* /home/laura/PBfB2018/Step_3/Results_3/.
-cd ~/PBfB2018/Step_3/Results_3
+cd ~/PBfB2018/Step_3/Results_3 #Change the working directory into the directory where the input file (all_TSHb.fa) is located.
+
+#Command line expression using perl for conducting a search / replace using regular expressions.
+perl -pe 's/PREDICTED:\s//g' all_TSHb.fa > all_TSHb2.fa #Replace all "PREDIDCTED:\s" by nothing and save it in a new file.
+perl -pe 's/^(>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+/\1\2_\3/g' all_TSHb2.fa > all_TSHb3.fa #Modify the header names by using regular expressions and save the output into a new file.
+grep ">" ~/PBfB2018/Step_3/Results_3/all_TSHb3.fa #Print the header names to check whether the names are modified in a proper way:
+echo "the FASTA file with modified header names has been saved as: all_TSHb3.fa" #Confirm that the program has been finished and files are saved:
+
 ```
-Command line expression using perl for conducting a search / replace using regular expressions.
-Replace all "PREDIDCTED:\s" by nothing and save it in a new file.
-```
-perl -pe 's/PREDICTED:\s//g' all_TSHb.fa > all_TSHb2.fa
-```
-Modify the header names by using regular expressions and save the output into a new file.
-```
-perl -pe 's/^(>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+/\1\2_\3/g' all_TSHb2.fa > all_TSHb3.fa
-```
+
 This gives: **">Mus_musculus"** as new header.
-
-Print the header names to check whether the names are modified in a proper way:
-```
-grep ">" ~/PBfB2018/Step_2/Results_2/all_TSHb3.fa
-
-```
-Confirm that the program has been finished and files are saved:
-```
-echo "the FASTA file with modified header names has been saved as: all_TSHb3.fa"
-```
 
 or:
 
