@@ -622,7 +622,7 @@ phyml -i trim_TSHb.nex -d nt -n 1 -m HKY85 #estimating the best phylogenetic tre
 nw_topology -I trim_TSHb.nex_phyml_tree | nw_display -s - > tree_TSHb.phy_phyml_tree.pdf  #-S -v 50 -b ’opacity:1’ -i ’font-size:8’ #trim_TSHb.nex_phyml_tree > tree_TSHb.phy_phyml_tree.svg 
 nw_topology -I trim_TSHb.nex_phyml_tree | nw_display -s - > tree_TSHb.phy_phyml_tree.svg  #-S -v 50 -b ’opacity:1’ -i ’font-size:8’ #trim_TSHb.nex_phyml_tree > tree_TSHb.phy_phyml_tree.svg 
 ```
-[Phylogenetic tree TSHb](/tree_TSHb.phy_phyml_tree.pdf)
+[Phylogenetic tree TSHb](/tree_TSHb.phy_phyml_tree.svg)
 
 ## Step_7: Building a phylogenetic tree with the R package "ape".
 
