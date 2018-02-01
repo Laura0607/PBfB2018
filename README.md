@@ -415,7 +415,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 Import the module Phylo from biopython and draw a phylogenetic tree from the output file (*.dnd) from the CLUSTAL multiple alignment that we just performed. 
 ```python
 >>> from Bio import Phylo
->>> tree = Phylo.read("test.dnd", "newick")
+>>> tree = Phylo.read("all_TSHb3.dnd", "newick")
 >>> Phylo.draw_ascii(tree)
               ____________ Mus_musculus
               |
