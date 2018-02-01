@@ -208,7 +208,7 @@ This tool is build into the script: **step_4a.sh**
 Runs this script in order to perform a multiple alignment, the output file will be saved as 2 files with a different format: NEXUS and PHYLIP.
 However, this might be changed into another format by changing the script. 
 
-### See below the content of script **step_4a.sh** + annotation.
+### See below the content of script ***step_4a.sh*** + annotation.
 ```
 #! /bin/bash
 #step_4a
@@ -579,8 +579,28 @@ _|   |
 Run the script **step_5.sh** to trim the alignment.
 In this script the trimAl tool is used combined with an automatic method to decide the optimal thresholds for trimming.
 Parameters can be changed by changing the script.
-Output will be saved as a file with a PHYLIP format. 
+Output will be saved as a file with a PHYLIP and NEXUS format. 
 Also a HTML file will be created containing the trimAl's trimming summary.
+
+### See below the content of script ***step_5.sh*** + annotation:
+```
+#! /bin/bash
+#step_5
+#Purpose: Cleaning and trimming a multiple sequence alignment by using "trimAl".
+#Written by: Laura van Rosmalen
+#Date: 31.01.2018
+
+cd ~/PBfB2018/Step_5/Data_5
+
+trimal -in msa_TSHb.nex -htmlout trim_TSHb.html -out trim_TSHb.nex -gappyout
+trimal -in msa_TSHb.phy -htmlout trim_TSHb.html -out trim_TSHb.phy -gappyout
+#gappyout uses an automatic method to decide optimal thresholds, based in the gap percentage count over the whole alignment.
+#Gets the trimAl's trimming summary in an HTML file. 
+
+ln -s /home/laura/PBfB2018/Step_5/Data_5/* /home/laura/PBfB2018/Step_6/Data_6/.
+ln -s /home/laura/PBfB2018/Step_5/Data_5/* /home/laura/PBfB2018/Step_5/Results_5/.
+```
+
 
 ## Step_6: Building a phylogenetic tree with "phyml" 
 
