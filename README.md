@@ -10,10 +10,11 @@ Use a consistent structure for you project:
 * Create subdirectories for each step of the project.
 * Each subdirectory must include 3 directories: Data, Code, Results 
 
-## Description:
+## Description: 
+Alignment of (photoperiodic) genes, tree building and SNP calling
+Retrieve DNA sequences of (photoperiodic) genes from NCBI | count them | count the sequence lengths | modify header names | multiple sequence alignment | cleaning and trimming | build phylogenetic tree | plot tree | export images
 
 ## Step_1: Download a batch of FASTA files containing genes of interest from NCBI and save it in a new directory.
-
 Make a list of IDs of DNA sequences that you would like to download from NCBI.The IDs for genes can be found at the NCBI website by entering the gene name + species name. 
 Save this list as a .txt file in the Data_1 directory: **~/PBfB2018/Step_1/Data_1**
 In this example I will make a list with the gene "TSHb" for different rodent species and save this list as **TSHb.txt**.
@@ -22,60 +23,167 @@ Use this list as <genome_id_list> in the script **step_1.py**.
 
 Run the python script **step_1.py** in order to download the FASTA files from NCBI.
 
-The following parts are included in this script:
+Make sure your current working directory is the same directory as where your input file is located.
+The program will automatically change the working directory into **~/PBfB2018/Step_1/Data_1/.**.
+The program loops trough the commands and retrieves the FASTA file for each ID, listed in the input file, and saves this as "ID#.fa" in the new directory. 
 
-Import the tool "urllib2" to be able to download files from the internet:
+See below the content of script **step_1.py** + annotation:
 ```python
-import urllib2
-```
+#!/usr/bin/python
+#step_1
+#Purpose: Download a batch of Fasta files from NCBI
+#Modified by Laura van Rosmalen from https://github.com/adina/cibnor-2017/blob/master/scripts/fetch-genomes.py
+#Date 29.01.2018
 
-Import the tools for file, directory and path manipulations:
-```python
+#import the tool "urllib2" for downloading files from the internet
+import urllib2 
+
+#import the "os" and "sys" tools for file, directory and path manipulations
 import os
 import sys
-```
 
-Import the time tool, in order to pause the python program.
-```python
+#import the time tool 
 import time
+
+os.chdir("/home/laura/PBfB2018/Step_1/Data_1") #change working directory into directory where the input file is located.
+
+#to count the number of arguments
+if len(sys.argv) != 3: #checks whether you at least entered 3 arguments
+    print "USAGE: step_1.py <genome_id_list> <out_dir>" #prints how the 
+    	#script should be used. provide a list of IDs (genomelist.txt) and where 
+    	#you want to save your files (the output directory) 
+    sys.exit(1) #exit the function when the text has been printed
+
+#url template, used to retrieve FASTA files from NCBI
+url_template = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=%s&rettype=fasta&retmode=text"
+
+os.mkdir(sys.argv[2]) #creates a new directory named sys.argv with numeric mode 2
+
+for id in open(sys.argv[1]): #runs trough every ID.For each ID# in the list of IDs 
+    id = id.strip() #Return a copy of the string (for each ID)
+    if id == "": #When all IDs in the list are gone trough the loop, continue. 
+        continue
+
+    sys.stdout.write("Fetching %s..." % id) #prints for each ID: "Fetching ID$#..." so you know the program is running.
+    sys.stdout.flush()
+    out_file = os.path.join(sys.argv[2], id + ".fa") #Defines the outputfile (Output (FASTA)files will be saved in the directory provided by the user, with "ID#.fa" as file namer
+    if os.path.exists(out_file): #If the output directory already exists, than print "already fetched"
+        print "already fetched"
+
+    open(out_file, "w").write(urllib2.urlopen(url_template % id).read()) #open the output file for writing. Write the output of the script to a new FASTA file.
+    #write the data from the url_template from the ID# to a new FASTA file in the defined new directory. 
+    print "Done" #prints done after each ID# in the terminal. so you know it is running
+    time.sleep(1.0/3) #Pauses the python programme for 1/3 seconds before starting the loop for the next ID# in the list of IDs given
 ```
 
 The program will ask you to enter a <genome_id_list>, this is a .txt file containing the IDs from the genes of interest that you would like to download from NCBI.
 In this example we will enter: "TSHb.txt" here.
-The program will ask you to define <out_dir>, define here a name of a new outputdirectory where you would like to save the FASTA files.
+The program will ask you to define <out_dir>, define here a name of a new output directory where you would like to save the FASTA files.
 In this example we will enter: **~/PBfB2018/Step_1/Results_1/OutputTSHb**
 
-Make sure your current working directory is the same directory as where your input file is located.
-The program will automatically change the working directory into **~/PBfB2018/Step_1/Data_1/.**
 
-The url_template is used to retrieve FASTA files from NCBI.
-```python
-url_template = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=%s&rettype=fasta&retmode=text"
-```
-
-The program loops trough the commands and retrieves the FASTA file for each ID that are listed in the input file, and saves this as "ID#.fa" in the new directory. 
-
-
-## Step_2: Combine the downloaded genes into one file named **"all_genename.fa"**.
+## Step_2: Combine the downloaded DNA-sequences into one file named **"all_genename.fa"**.
 
 Run the fowllowing script: **step_2.sh**:
 
-Linking your results from step_1 to the directoru Data_2.
-Change directory into the directory where your fasta files are linked to 
-use the "cat" command in order to concatenate all sequences into 1 FASTA file.
-Save this new file in the Results_2 directory.
+This program will first link your results from step_1 to the directory Data_2.
+Change the working directory into the directory where your fasta files are linked to.
+Use the "cat" command in order to concatenate all sequences into 1 FASTA file.
+Save this new file in the Results_2 directory with the name **all_TSHb.fa**
 
+### See below the content of script **step_2.sh** + annotation:
 ```
+#! /bin/bash
+#step_2
+#Purpose: combine FASTA files into 1 file
+#Written by: Laura van Rosmalen
+#Date: 31.01.2018
+
+#linking your results from step_1 to the directory Data_2
 ln -s /home/laura/PBfB2018/Step_1/Results_1/OutputTSHb/* /home/laura/PBfB2018/Step_2/Data_2/.
-cd ~/PBfB2018/Step_1/Data_1/outTSHb/
-cat *fa > ~/PBfB2018/Step_2/Results_2/all_TSHb.fa
+cd ~/PBfB2018/Step_2/Data_2/ #change directory into the directory where your input file is located.
+cat *.fa > ~/PBfB2018/Step_2/Results_2/all_TSHb.fa #save all fasta files within that directory as a new file
+
+#linking your results from step_2 to the directory Data_3
+ln -s /home/laura/PBfB2018/Step_2/Results_2/all_TSHb.fa /home/laura/PBfB2018/Step_3/Data_3/.
 ```
 
-
-## Step_3: Count the amount of DNA sequences, count sequence lengths and modify header names.
+## Step_3: Count the amount of DNA-sequences, count sequence lengths and modify header names.
 
 Run the python script **step_3a.py** in your terminal in order to determine the DNA sequence length for each ID and save this as a .txt file..
 Furthermore this programme prints the amount of sequences in your fasta file.
+
+### See below the content of script **step_3a.py** + annotation:
+```python
+#!/usr/bin/python
+#Step_3
+#Purpose: This program determines the sequence lengths and saves the output in a new .txt file
+#Written by: Laura van Rosmalen
+#Date: 29.01.2018
+
+
+#for FASTA files, the record identifier is the first word on the >line
+
+import os
+os.chdir("/home/laura/PBfB2018/Step_3/Data_3") #change working directory into directory where the input file is located.
+
+from Bio import SeqIO #import the module Sequence Input/Output
+
+#InFileName = raw_input("Enter a filename") #user input --> insert filename on which to run the script
+InFileName = "all_TSHb.fa"
+
+#This calculates the number of sequences of a fasta file
+count = 0
+for line in file("all_TSHb.fa", 'r'):
+    if line.startswith('>'):
+        count += 1
+
+
+#InFileName = "all_TSHb.fa" #give the file name for which you would like to determine the sequence lengths.
+
+OutFileName=InFileName + ".txt" #the output file will be saved as a text file with the same name as the inputfile.
+OutFile=open(OutFileName, 'w') #to open the OutFile, and make the file writable. 
+
+#modified from: https://github.com/peterjc/biopython_workshop/blob/master/reading_sequence_files/README.rst
+for record in SeqIO.parse(InFileName, "fasta"): #For each record in the fasta file
+    Output = ("Record " + record.id + ", length " + str(len(record.seq))) #print record ID + the sequence length.
+    print(Output)
+    OutFile.write(Output+ "\n") #write the output to the OutFile 
+    
+print "The file contains", count, "sequences" #prints the amount of sequences that the fasta file contains
+print("The sequence lengths have been saved as all_TSHb.txt") #confirms that the output file has been saved
+```
+
+To modidy the header names in the FASTA file, run the shell script: **step_3b.sh**.
+### step_3b.sh:
+linking the Data_3 to Results_3.
+Change the working directory into the directory where the input file (all_TSHb.fa) is located.
+```
+ln -s /home/laura/PBfB2018/Step_3/Data_3/* /home/laura/PBfB2018/Step_3/Results_3/.
+cd ~/PBfB2018/Step_3/Results_3
+```
+Command line expression using perl for conducting a search / replace using regular expressions.
+Replace all "PREDIDCTED:\s" by nothing and save it in a new file.
+```
+perl -pe 's/PREDICTED:\s//g' all_TSHb.fa > all_TSHb2.fa
+```
+Modify the header names by using regular expressions and save the output into a new file.
+```
+perl -pe 's/^(>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+/\1\2_\3/g' all_TSHb2.fa > all_TSHb3.fa
+```
+This gives: **">Mus_musculus"** as new header.
+
+Print the header names to check whether the names are modified in a proper way:
+```
+grep ">" ~/PBfB2018/Step_2/Results_2/all_TSHb3.fa
+
+```
+Confirm that the program has been finished and files are saved:
+```
+echo "the FASTA file with modified header names has been saved as: all_TSHb3.fa"
+```
+
+or:
 
 Open the FASTA file in your texteditor (jEdit). Use regular expression in order to modify the header names.
 
@@ -95,47 +203,36 @@ Search for: (>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+
 Replace with:$1$2_$3
 ```
 This gives: **">Mus_musculus"** as new header.
-Save the modified file as: **all_genename_mod.fa**
+Save the modified file as: **all_TSHb3.fa**
 
-or:
-Run the shell script: **step_3b.sh**
 
-### step_3b.sh:
-linking the Data_3 to Results_3.
-Change the working directory into the directory where the input file (all_TSHb.fa) is located.
-```
-ln -s /home/laura/PBfB2018/Step_3/Data_3/* /home/laura/PBfB2018/Step_3/Results_3/.
-cd ~/PBfB2018/Step_3/Results_3
-```
-
-Command line expression using perl for conducting a search / replace using regular expressions.
-Replace all "PREDIDCTED:\s" by nothing and save it in a new file.
-```
-perl -pe 's/PREDICTED:\s//g' all_TSHb.fa > all_TSHb2.fa
-```
-Modify the header names by using regular expressions and save the output into a new file.
-```
-perl -pe 's/^(>)\w+.+\d+\.\d+\s(\w+)\s(\w+).+/\1\2_\3/g' all_TSHb2.fa > all_TSHb3.fa
-```
-This gives: **">Mus_musculus"** as new header.
-
-Print the header names to check whether the names are modified in a proper way:
-```
-grep ">" ~/PBfB2018/Step_2/Results_2/all_TSHb3.fa
-
-```
-
-Confirm that the program has been finished and files are saved:
-```
-echo "the FASTA file with modified header names has been saved as: all_TSHb3.fa"
-```
-
-## Step_4: Multiple sequence alignments and building a tree. 
+## Step_4: Multiple sequence alignment and building a tree. 
 
 Use the tool **clustalw** to perform a multiple sequence alignment.
 This tool is build into the script: **step_4a.sh**
-Runs this script in order to perform a multiple alignment, the output file will be saved as a PHYLIP file.
+Runs this script in order to perform a multiple alignment, the output file will be saved as 2 files with a different format: NEXUS and PHYLIP.
 However, this might be changed into another format by changing the script. 
+
+### See below the content of script **step_4a.sh** + annotation.
+```
+#! /bin/bash
+#step_4a
+#Purpose: Multiple sequence alignment by using clustalw
+#Written by: Laura van Rosmalen
+#Date: 31.01.2018
+
+ln -s /home/laura/PBfB2018/Step_3/Results_3/all_TSHb3.fa /home/laura/PBfB2018/Step_4/Data_4/.
+cd ~/PBfB2018/Step_4/Data_4 #change directory to the directory where your input file is located
+
+clustalw -INFILE=all_TSHb3.fa -TYPE=DNA -OUTFILE=msa_TSHb.nex -OUTPUT=NEXUS #the output file is saved as NEXUS format, which can be used as input file in many other programs. 
+clustalw -INFILE=all_TSHb3.fa -TYPE=DNA -OUTFILE=msa_TSHb.phy -OUTPUT=PHYLIP #the output file is saved as PHYLIP format, which can be used as input file in many other programs. 
+
+echo "multiple sequence alignment is completed" 
+echo "the output file has been saved with both a NEXUS and PHYLIP format" 
+
+ln -s /home/laura/PBfB2018/Step_4/Data_4/* /home/laura/PBfB2018/Step_4/Results_4/.
+ln -s /home/laura/PBfB2018/Step_4/Results_4/* /home/laura/PBfB2018/Step_5/Data_5/.
+```
 
 or: 
 Use the command ***"clustalw"*** in your terminal in order to start a CLUSTALW multiple sequence alignment.
@@ -399,7 +496,29 @@ Consensus length = 9379
 CLUSTAL-Alignment file created  [TSHb.aln]
 ```
 
+Run the script **step_4b.py** to print a phylogenetic tree for your multiple sequence alignment.
 
+### See below the content of script **step_4b.py** + annotation:
+```python
+#!/usr/bin/python
+#Step_4b
+#Purpose: Build a phylogenetic tree by using the Biopython tool Phylo
+#Written by: Laura van Rosmalen
+#Date: 31.01.2018
+
+import os
+os.chdir("/home/laura/PBfB2018/Step_4/Data_4") #change working directory into directory where the input file is located.
+
+from Bio import Phylo #import the module Phylo
+
+tree = Phylo.read("all_TSHb3.dnd", "newick") #read the input file in the PHYLIP format.
+Phylo.draw_ascii(tree) #draw the phylogenetic tree from your input file
+
+print "Phylogenetic tree for the TSHb gene for different rodent species is depicted above" 
+```
+The phylogenetic tree will be depicted in your terminal as shown below.
+
+or:
 Open python in your terminal by just typing: "python"
 
 ```
@@ -411,9 +530,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-
 Import the module Phylo from biopython and draw a phylogenetic tree from the output file (*.dnd) from the CLUSTAL multiple alignment that we just performed. 
-```python
+```
 >>> from Bio import Phylo
 >>> tree = Phylo.read("all_TSHb3.dnd", "newick")
 >>> Phylo.draw_ascii(tree)
@@ -460,10 +578,8 @@ _|   |
 >>> 
 ```
 
-or:
-Run the script **step_4b.py** to print a phylogenetic tree for your multiple sequence alignment.
 
-## Step_5: Cleaning and trimming a multiple sequence alignment by using " trimAl"
+## Step_5: Cleaning and trimming a multiple sequence alignment(MSA) by using " trimAl".
 
 Run the script **step_5.sh** to trim the alignment.
 In this script the trimAl tool is used combined with an automatic method to decide the optimal thresholds for trimming.
